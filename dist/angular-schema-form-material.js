@@ -638,7 +638,6 @@ return /******/ (function(modules) { // webpackBootstrap
 		          /**
 		           * Evaluate an expression, i.e. scope.$eval
 		           * but do it in sfSchemas parent scope sf-schema directive is used
-		           *
 		           * @param {string} expression
 		           * @param {Object} locals (optional)
 		           * @return {Any} the result of the expression
@@ -655,7 +654,6 @@ return /******/ (function(modules) { // webpackBootstrap
 		          /**
 		           * Evaluate an expression, i.e. scope.$eval
 		           * in this decorators scope
-		           *
 		           * @param {string} expression
 		           * @param {Object} locals (optional)
 		           * @return {Any} the result of the expression
@@ -675,7 +673,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		           * Use the Angular `{{ interpolation }}`
 		           * braces to access properties on `locals`.
 		           *
-		           * @param  {string} expression The string to interpolate.
+		           * @param  {string} content The string to interpolate.
 		           * @param  {Object} locals (optional) Properties that may be accessed in the
 		           *                         `expression` string.
 		           * @return {Any} The result of the expression or `undefined`.
@@ -747,7 +745,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 		                  var evalExpr = 'evalExpr(form.condition,{ model: model, "arrayIndex": arrayIndex})';
 		                  if (form.key) {
-		                    evalExpr = 'evalExpr(form.condition, {' + 'model: model, "arrayIndex": arrayIndex, "modelValue": model' + sfPath.stringify(form.key) + '})';
+		                    evalExpr = 'evalExpr(form.condition,{ model: model, "arrayIndex": arrayIndex, "modelValue": model' + sfPath.stringify(form.key) + '})';
 		                  }
 
 		                  _angular2.default.forEach(element.children(), function (child) {
@@ -807,8 +805,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		                });
 
 		                // Clean up the model when the corresponding form field is $destroy-ed.
-		                // Default behavior can be supplied as a globalOption, and behavior can be overridden
-		                // in the form definition.
+		                // Default behavior can be supplied as a globalOption, and behavior can be overridden in the form definition.
 		                scope.$on('$destroy', function () {
 		                  // If the entire schema form is destroyed we don't touch the model
 		                  if (!scope.externalDestructionInProgress) {
@@ -985,7 +982,6 @@ return /******/ (function(modules) { // webpackBootstrap
 		   * DEPRECATED
 		   * Same as createDirective, but takes an object where key is 'type' and value is 'templateUrl'
 		   * Useful for batching.
-		   *
 		   * @param {Object} templates
 		   */
 		  this.createDirectives = function (templates) {
@@ -996,7 +992,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 		  /**
 		   * Getter for decorator settings
-		   *
 		   * @param {string} name (optional) defaults to defaultDecorator
 		   * @return {Object} rules and templates { rules: [],templates: {}}
 		   */
@@ -1008,7 +1003,6 @@ return /******/ (function(modules) { // webpackBootstrap
 		  /**
 		   * DEPRECATED use defineAddOn() instead.
 		   * Adds a mapping to an existing decorator.
-		   *
 		   * @param {String} name Decorator name
 		   * @param {String} type Form type for the mapping
 		   * @param {String} url  The template url
@@ -1027,7 +1021,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 		  /**
 		   * Adds an add-on to an existing decorator.
-		   *
 		   * @param {String} name Decorator name
 		   * @param {String} type Form type for the mapping
 		   * @param {String} url  The template url
@@ -1063,8 +1056,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 		function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-		;
-
 	/***/ },
 	/* 5 */
 	/***/ function(module, exports, __webpack_require__) {
@@ -1076,6 +1067,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		});
 
 		exports.default = function () {
+
 		  var postProcessFn = function postProcessFn(form) {
 		    return form;
 		  };
@@ -1202,7 +1194,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 		/*!
 		 * json-schema-form
-		 * @version 1.0.0-alpha.2
+		 * @version 1.0.0-alpha.1
 		 * @link https://github.com/json-schema-form/json-schema-form-core
 		 * @license MIT
 		 * Copyright (c) 2016 JSON Schema Form
@@ -2094,6 +2086,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		});
 
 		exports.default = function () {
+
 		  var validator = {};
 
 		  /**
@@ -2103,17 +2096,17 @@ return /******/ (function(modules) { // webpackBootstrap
 		   *
 		   * @param {Object} form A merged form definition, i.e. one with a schema.
 		   * @param {Any} value the value to validate.
-		   * @return {Object} a tv4js result object.
+		   * @return a tv4js result object.
 		   */
 		  validator.validate = function (form, value) {
 		    if (!form) {
 		      return { valid: true };
-		    };
-
+		    }
 		    var schema = form.schema;
+
 		    if (!schema) {
 		      return { valid: true };
-		    };
+		    }
 
 		    // Input of type text and textareas will give us a viewValue of ''
 		    // when empty, this is a valid value in a schema and does not count as something
@@ -2121,12 +2114,12 @@ return /******/ (function(modules) { // webpackBootstrap
 		    // not validate if it's required.
 		    if (value === '') {
 		      value = undefined;
-		    };
+		    }
 
 		    // Numbers fields will give a null value, which also means empty field
 		    if (form.type === 'number' && value === null) {
 		      value = undefined;
-		    };
+		    }
 
 		    // Version 4 of JSON Schema has the required property not on the
 		    // property itself but on the wrapping object. Since we like to test
@@ -2137,13 +2130,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 		    if (form.required) {
 		      wrap.required = [propName];
-		    };
-
+		    }
 		    var valueWrap = {};
 		    if (_angular2.default.isDefined(value)) {
 		      valueWrap[propName] = value;
-		    };
-
+		    }
 		    return _tv2.default.validateResult(valueWrap, wrap);
 		  };
 
@@ -2252,7 +2243,6 @@ return /******/ (function(modules) { // webpackBootstrap
 		     * Interpolate and return proper error for an eror code.
 		     * Validation message on form trumps global error messages.
 		     * and if the message is a function instead of a string that function will be called instead.
-		     *
 		     * @param {string} error the error code, i.e. tv4-xxx for tv4 errors, otherwise it's whats on
 		     *                       ngModel.$error for custom errors.
 		     * @param {Any} value the actual model value.
@@ -2321,6 +2311,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		});
 
 		exports.default = function () {
+
 		  // expose the methods in sfPathProvider
 		  this.parse = _jsonSchemaFormCore.sfPath.parse;
 		  this.stringify = _jsonSchemaFormCore.sfPath.stringify;
@@ -2373,7 +2364,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		        // most notably for errors.
 		        // So we emit it up to the decorator directive so it can put it on scope.
 		        scope.$emit('schemaFormPropagateNgModelController', ngModel);
-		      };
+		      }
 
 		      // Watch for the form definition and then rewrite it.
 		      // It's the (first) array part of the key, '[]' that needs a number
@@ -2381,7 +2372,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		      var once = scope.$watch(attrs.sfArray, function (form) {
 		        if (!form) {
 		          return;
-		        };
+		        }
 
 		        // An array model always needs a key so we know what part of the model
 		        // to look at. This makes us a bit incompatible with JSON Form, on the
@@ -2741,7 +2732,6 @@ return /******/ (function(modules) { // webpackBootstrap
 		        /**
 		         * Evaluate an expression, i.e. scope.$eval
 		         * in this decorators scope
-		         *
 		         * @param {string} expression
 		         * @param {Object} locals (optional)
 		         * @return {Any} the result of the expression
@@ -2761,7 +2751,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		         * Use the Angular `{{ interpolation }}`
 		         * braces to access properties on `locals`.
 		         *
-		         * @param  {string} expression The string to interpolate.
+		         * @param  {string} content The string to interpolate.
 		         * @param  {Object} locals (optional) Properties that may be accessed in the
 		         *                         `expression` string.
 		         * @return {Any} The result of the expression or `undefined`.
@@ -3148,13 +3138,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 		              form.titleMap.forEach(function (item, index) {
 		                var arrIndex = arr.indexOf(item.value);
-		                if (arrIndex === -1 && vals[index]) {
-		                  arr.push(item.value);
-		                };
-
-		                if (arrIndex !== -1 && !vals[index]) {
-		                  arr.splice(arrIndex, 1);
-		                };
+		                if (arrIndex === -1 && vals[index]) arr.push(item.value);
+		                if (arrIndex !== -1 && !vals[index]) arr.splice(arrIndex, 1);
 		              });
 		              // Time to validate the rebuilt array.
 		              // validateField method is exported by schema-validate
@@ -3355,7 +3340,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		          });
 		        } else {
 		          internalRender(schema, form, merged);
-		        };
+		        }
 		      };
 
 		      var internalRender = function internalRender(schema, form, merged) {
@@ -3368,7 +3353,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		          scope.externalDestructionInProgress = true;
 		          childScope.$destroy();
 		          scope.externalDestructionInProgress = false;
-		        };
+		        }
 		        childScope = scope.$new();
 
 		        //make the form available to decorators
@@ -3534,7 +3519,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		        // Since we might have different tv4 errors we must clear all
 		        // errors that start with tv4-
 		        Object.keys(ngModel.$error).filter(function (k) {
-		          return k.indexOf('tv4-') === 0 || k.indexOf('md-') === 0;
+		          return k.indexOf('tv4-') === 0;
 		        }).forEach(function (k) {
 		          ngModel.$setValidity(k, true);
 		        });
@@ -4086,7 +4071,11 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 7 */
 /***/ function(module, exports) {
 
-	angular.module('schemaForm').directive('sfMaterialClass', function ($compile, $timeout) {
+	angular.module('schemaForm').directive('sfMaterialClass', sfMaterialClassDirective);
+
+	sfMaterialClassDirective.$inject = ['$compile', '$timeout'];
+
+	function sfMaterialClassDirective($compile, $timeout) {
 	    return {
 	        restrict: 'A',
 	        scope: false,
@@ -4111,7 +4100,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }, 0);
 	        }
 	    };
-	});
+	}
 
 /***/ }
 /******/ ])
